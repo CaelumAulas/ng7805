@@ -1,0 +1,9 @@
+<header class="jumbotron">
+  <h1 class="text-center">{{title}}</h1>
+</header>
+<main class="container">
+  <div class="row">
+    <app-card *ngFor="let foto of listaFotos | async" [fotoObj]="foto" class="col-md-3">
+    </app-card>
+  </div>
+</main>

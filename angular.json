@@ -124,5 +124,10 @@
       }
     }
   },
-  "defaultProject": "ng7805"
+  "defaultProject": "ng7805",
+  "schematics": {
+    "@schematics/angular:component": {
+      "inlineStyle": true
+    } 
+  }
 }
