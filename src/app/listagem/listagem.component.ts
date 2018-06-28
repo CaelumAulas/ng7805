@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { FotoService } from '../services/foto.service';
 
 @Component({
   selector: 'app-listagem',
@@ -11,9 +11,8 @@ export class ListagemComponent implements OnInit {
   title = `Caelumpic`
   listaFotos
 
-  constructor(conexaoApi: HttpClient) {
-    this.listaFotos = conexaoApi.get('http://localhost:3000/v1/fotos')
-
+  constructor(private servico: FotoService) {
+    this.listaFotos = this.servico.listar()
   }
 
   ngOnInit() {
