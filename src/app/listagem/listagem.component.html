@@ -2,13 +2,19 @@
   <h1 class="text-center">{{title}}</h1>
 </header>
 <main class="container">
+  <div class="row" *ngIf="mensagem.texto">
+    <div class="col-12">
+      <app-mensagem [texto]="mensagem.texto" [tipo]="mensagem.tipo"></app-mensagem>
+    </div>
+  </div>
   <div class="row mb-4">
     <div class="col-md-12">
       <a routerLink="/cadastro" class="btn btn-primary">Nova foto</a>
     </div>
   </div>
   <div class="row">
-    <app-card *ngFor="let foto of listaFotos | async" [fotoObj]="foto" class="col-md-3">
+    <app-card *ngFor="let foto of listaFotos" [fotoObj]="foto" class="col-md-3">
+      <button (click)="apagar(foto)" class="btn btn-danger">Apagar</button>
     </app-card>
   </div>
 </main>

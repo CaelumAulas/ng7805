@@ -7,5 +7,5 @@ import { FotoComponent } from "../foto/foto.component";
     styles: []  
 })
 export class CardComponent {
-    @Input() fotoObj: FotoComponent
+    @Input() fotoObj: FotoComponent    
 }

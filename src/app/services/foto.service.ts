@@ -10,22 +10,24 @@ const base_url = 'http://localhost:3000/'
 })
 export class FotoService {
 
-    private url = `${base_url}v1/fotos`
+    private url = `${base_url}v1/fotos/`
     private cabecalho = {
         headers: new HttpHeaders({'Content-Type':'application/json'})
     }
 
     constructor(private conexaoApi: HttpClient){}
 
-    listar(): Observable<Object> {
-        return this.conexaoApi.get(this.url)
+    listar(): Observable<FotoComponent[]> {
+        return this.conexaoApi.get<FotoComponent[]>(this.url)
     }
 
     cadastrar(foto: FotoComponent): Observable<Object> {
-        return this.conexaoApi.post(this.url,foto)
+        return this.conexaoApi.post(this.url,foto, this.cabecalho)
     }
 
-    deletar(){}
+    deletar(foto: FotoComponent): Observable<Object> {
+        return this.conexaoApi.delete(this.url+foto._id)
+    }
 
     alterar(){}
 
