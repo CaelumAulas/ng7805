@@ -62,7 +62,7 @@ export class CadastroComponent implements OnInit {
       // this.foto.descricao = this.formCadastro.get('descricao').value
 
       //ou essa lindeza
-      this.foto = this.formCadastro.value
+      this.foto = {...this.foto, ...this.formCadastro.value}
 
       if(this.foto._id){
         this.servico
