@@ -15,6 +15,7 @@
   <div class="row">
     <app-card *ngFor="let foto of listaFotos" [fotoObj]="foto" class="col-md-3">
       <button (click)="apagar(foto)" class="btn btn-danger">Apagar</button>
+      <a [routerLink]="['/cadastro',foto._id]" class="btn btn-primary">Editar</a>
     </app-card>
   </div>
 </main>
