@@ -3,6 +3,7 @@ import { FotoComponent } from '../foto/foto.component';
 import { MensagemComponent } from '../mensagem/mensagem.component';
 import { FotoService } from '../services/foto.service';
 import { ActivatedRoute, Router } from "@angular/router";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,37 +14,55 @@ export class CadastroComponent implements OnInit {
 
   foto = new FotoComponent()
   mensagem = new MensagemComponent()
+  formCadastro: FormGroup //propriedade do tipo formulario
 
   constructor(private servico: FotoService,
               private rotaAtiva: ActivatedRoute,
-              private roteador: Router) {
+              private roteador: Router,
+              private formBuilder: FormBuilder) {
 
-      let fotoId = this.rotaAtiva.snapshot.params.fotoId
-        
-      if (fotoId){
-        this.servico
-            .pesquisar(fotoId)
-            .subscribe(
-              fotoApi => this.foto = fotoApi
-            )
-      }
-        
-      // this.rotaAtiva.params.subscribe( 
-      //   parametrosRota => {
-      //     this.servico
-      //         .pesquisar(parametrosRota.fotoId)
-      //         .subscribe(
-      //           fotoApi => this.foto = fotoApi
-      //         )
-      //   }
-      // )
-                
+        this.formCadastro = this.formBuilder.group({
+          titulo: ['', Validators.compose([
+            Validators.required,
+            Validators.minLength(5)
+          ])],
+          url: ['', Validators.required],
+          descricao: ''
+        })
   }
 
   ngOnInit() {
-  }
+    let fotoId = this.rotaAtiva.snapshot.params.fotoId
 
+    if (fotoId) {
+      this.servico
+        .pesquisar(fotoId)
+        .subscribe(
+          fotoApi => {
+            this.foto = fotoApi
+            // this.formCadastro.get('titulo').setValue(fotoApi.titulo)
+            // this.formCadastro.get('url').setValue(fotoApi.url)
+            // this.formCadastro.get('descricao').setValue(fotoApi.descricao)
+            //ou
+            //this.formCadastro.setValue(fotoApi)
+            //ou essa lindeza
+            this.formCadastro.patchValue(fotoApi)
+            
+          }
+        )
+    }
+
+    
+  }
+  
   salvar(){
+    
+      // this.foto.titulo = this.formCadastro.get('titulo').value
+      // this.foto.url = this.formCadastro.get('url').value
+      // this.foto.descricao = this.formCadastro.get('descricao').value
+
+      //ou essa lindeza
+      this.foto = this.formCadastro.value
 
       if(this.foto._id){
         this.servico

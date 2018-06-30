@@ -8,7 +8,7 @@ import { CardModule } from './card/card.module';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModuloRoteamento } from './app.routes';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MensagemComponent } from './mensagem/mensagem.component';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     FormsModule,
     FotoModule,
     CardModule,
-    ModuloRoteamento
+    ModuloRoteamento,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
